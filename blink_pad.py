@@ -13,25 +13,18 @@ mongo = PyMongo(app)
 
 accessUsers = mongo.db.users
 
-@app.route("/", methods=['GET','PUT'])          # The "@" decorator associates this route with the function immediately following
+# @app.route("/", methods=['GET','PUT'])          # The "@" decorator associates this route with the function immediately following
+# def index():
+#     # context = accessUsers.find()
+#     context = accessUsers.find_one({},{'_id': 0, 'Likes': 1})
+
+#     # return jsonify({
+#     #     'data' : context
+#     # })
+#     return render_template('index.html', likes=context)
+
+@app.route("/", methods=['GET', 'PUT'])
 def index():
-    # context = accessUsers.find()
-    context = accessUsers.find_one({},{'_id': 0, 'Likes': 1})
-
-    # return jsonify({
-    #     'data' : context
-    # })
-    return render_template('index.html', likes=context)
-
-
-# @app.route("/", methods=['PUT'])
-# def update():
-#     # update = accessUsers.update_one({"_id": request.}, {"$set": {'Likes': ""}})
-        
-#     return jsonify()
-
-@app.route("/likes", methods=['GET', 'PUT'])
-def likes():
     bun1 = accessUsers.find_one({"id":1})
     usrID1 = bun1['_id']
     bun2 = accessUsers.find_one({"id":2})
