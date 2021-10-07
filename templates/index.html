@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<body>
+
+
+    <div id="app">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="card" style="width:400px">
+                        <div class="bun-image">
+                            <img v-bind:src="image1" alt="bun1" height=250 width=400>
+                        </div>
+                        <div class="card-body">
+                            <div class="bun-info">
+                                <p> Likes: [[ bun1 ]] </p> 
+                                <button @click='add1'>+1</button>
+                                <button @click='minus1'>-1</button>
+                            </div>
+                        </div>
+                    </div>
+                <div class="col">
+                    <div class="card" style="width:400px">
+                        <div class="bun-image">
+                            <img v-bind:src="image2" alt="bun2" height=250 width=400>
+                        </div>
+                        <div class="card-body">
+                            <div class="bun-info">
+                                <p> Likes: [[ bun2 ]] </p> 
+                                <button @click='add2'>+1</button>
+                                <button @click='minus2'>-1</button>
+                            </div>
+                        </div>
+                    </div>
+                <div class="w-100"></div>
+                <div class="col">
+                    <div class="card" style="width:400px">
+                        <div class="bun-image">
+                            <img v-bind:src="image3" alt="bun3" height=250 width=400>
+                        </div>
+                        <div class="card-body">
+                            <div class="bun-info">
+                                <p> Likes: [[ bun3 ]] </p> 
+                                <button @click='add3'>+1</button>
+                                <button @click='minus3'>-1</button>
+                            </div>
+                        </div>
+                    </div>
+                <div class="col">
+                    <div class="card" style="width:400px">
+                        <div class="bun-image">
+                            <img v-bind:src="image4" alt="bun4" height=250 width=400>
+                        </div>
+                        <div class="card-body">
+                            <div class="bun-info">
+                                <p> Likes: [[ bun4 ]] </p> 
+                                <button @click='add4'>+1</button>
+                                <button @click='minus4'>-1</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>      
+
+            <!-- <div class="bun-image">
+                <img v-bind:src="image2" alt="bun2" height=250 width=400>
+            </div>
+            <div class="bun-info">
+                    <p> Likes: [[ bun2 ]] </p> 
+                    <button @click='add2'>+1</button>
+                    <button @click='minus2'>-1</button>
+            </div> -->
+        </div>
+    </div>
+    
+
+
+<!-- creates a new Vue instance with the element '#app', delimiters just allows both jinja and Vue to show respective info and some key value pairs in data -->
+<script>
+var app = new Vue({  
+    el: '#app',
+    delimiters: ['[[', ']]'],
+    data: {
+        bun1: "{{ bun1['Likes'] }}",
+        image1: "./static/bun1.jpg",
+        bun2: "{{ bun2['Likes'] }}",
+        image2: "./static/bun2.jpg",
+        bun3: "{{ bun3['Likes'] }}",
+        image3: "./static/bun3.jpg",
+        bun4: "{{ bun4['Likes'] }}",
+        image4: "./static/bun4.jpg",
+    },
+    props: ['value'],
+    methods: {
+        add1: function() {
+            fetch('/likes', {
+                method: 'PUT',
+                headers: {
+                    "Accept": "application/json",
+                    "Content-Type":"application/json"
+                },
+                body: JSON.stringify(this.bun1++)
+            })
+            .then(response => response.json())
+            .then(data => this.bun1 = data)
+        },
+        minus1: function() {
+            fetch('/likes', {
+                method: 'PUT',
+                headers: {
+                    "Accept": "application/json",
+                    "Content-Type":"application/json"
+                },
+                body: JSON.stringify(this.bun1--)
+            })
+            .then(response => response.json())
+            .then(data => this.bun1 = data)
+        },
+        add2: function() {
+            fetch('/likes', {
+                method: 'PUT',
+                headers: {
+                    "Accept": "application/json",
+                    "Content-Type":"application/json"
+                },
+                body: JSON.stringify(this.bun2++)
+            })
+            .then(response => response.json())
+            .then(data => this.bun2 = data)
+        },
+        minus2: function() {
+            fetch('/likes', {
+                method: 'PUT',
+                headers: {
+                    "Accept": "application/json",
+                    "Content-Type":"application/json"
+                },
+                body: JSON.stringify(this.bun2--)
+            })
+            .then(response => response.json())
+            .then(data => this.bun2 = data)
+        },
+        add3: function() {
+            fetch('/likes', {
+                method: 'PUT',
+                headers: {
+                    "Accept": "application/json",
+                    "Content-Type":"application/json"
+                },
+                body: JSON.stringify(this.bun3++)
+            })
+            .then(response => response.json())
+            .then(data => this.bun3 = data)
+        },
+        minus3: function() {
+            fetch('/likes', {
+                method: 'PUT',
+                headers: {
+                    "Accept": "application/json",
+                    "Content-Type":"application/json"
+                },
+                body: JSON.stringify(this.bun3--)
+            })
+            .then(response => response.json())
+            .then(data => this.bun3 = data)
+        },
+        add4: function() {
+            fetch('/likes', {
+                method: 'PUT',
+                headers: {
+                    "Accept": "application/json",
+                    "Content-Type":"application/json"
+                },
+                body: JSON.stringify(this.bun4++)
+            })
+            .then(response => response.json())
+            .then(data => this.bun4 = data)
+        },
+        minus4: function() {
+            fetch('/likes', {
+                method: 'PUT',
+                headers: {
+                    "Accept": "application/json",
+                    "Content-Type":"application/json"
+                },
+                body: JSON.stringify(this.bun4--)
+            })
+            .then(response => response.json())
+            .then(data => this.bun4 = data)
+        }
+    }
+})
+</script>
+</body>
+</html>
